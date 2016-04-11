@@ -50,14 +50,14 @@ namespace ConsoleApplication1
                 result += ")";
             }
             else if(node as ManyChildrenNode != null)
-			{
-				ManyChildrenNode mcn = (ManyChildrenNode)node;
-				List<Node> child = mcn.Children.ToList();
-				result += "new ManyChildrenNode(" + node.Name + ",";
-				foreach(var cnode in child)
-					result += Subdescribe(cnode, count + 1);
-				result += ")";
-			}
+	    {
+		ManyChildrenNode mcn = (ManyChildrenNode)node;
+		List<Node> child = mcn.Children.ToList();
+		result += "new ManyChildrenNode(" + node.Name + ",";
+		foreach(var cnode in child)
+			result += Subdescribe(cnode, count + 1);
+		result += ")";
+	    }
             return result;
         }
     }
