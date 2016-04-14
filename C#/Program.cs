@@ -15,11 +15,7 @@ namespace ConsoleApplication1
         {
             INodeDescriber implementation = new NodeDescriber();
 
-            var testData = new SingleChildNode("root",
-                new TwoChildrenNode("child1",
-                    new NoChildrenNode("leaf1"),
-                    new SingleChildNode("child2",
-                                new NoChildrenNode("leaf2"))));
+            var testData = new SingleChildNode("root", new TwoChildrenNode("child1",new NoChildrenNode("child3"),new SingleChildNode("child2",new NoChildrenNode("leaf1"))));
             var result = implementation.Describe(testData);
             INodeTransformer implementation2 = new NodeTransformer();
             var testData2 = new ManyChildrenNode("root",
@@ -29,6 +25,14 @@ namespace ConsoleApplication1
                         new ManyChildrenNode("leaf2"))));
             var result2 = implementation2.Transform(testData2);
             var result3 = implementation.Describe(result2);
+            Console.WriteLine(result);
+
+            INodeWriter implementation3 = new NodeWriter(NodeDesFactory.GetNodeDescriber());
+            string filepath = @"G:\WriteLines.txt";
+            implementation3.WriteToFileAsync(testData, filepath);
+            var result5 = File.ReadAllText(filepath);
+
+            Console.ReadKey();
         }
     }
 }
